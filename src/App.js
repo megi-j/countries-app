@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import moon from "./images/moon.png";
 import { Helmet } from "react-helmet";
+import FilterSection from "./FilterSection";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -31,6 +32,7 @@ function App() {
           <ModeText>Dark Mode</ModeText>
         </ModeBox>
       </Header>
+      <FilterSection />
     </Container>
   );
 }
@@ -41,6 +43,7 @@ const Container = styled.div`
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+  background: #fafafa;
 `;
 const Header = styled.header`
   width: 100%;
