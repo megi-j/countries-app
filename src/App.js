@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import FilterSection from "./components/FilterSection";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MainSection from "./components/MainSection";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -44,6 +45,7 @@ function App() {
         </ModeBox>
       </Header>
       <FilterSection data={data} fetched={fetched} />
+      <MainSection data={data} fetched={fetched} />
     </Container>
   );
 }

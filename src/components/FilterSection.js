@@ -79,5 +79,12 @@ const Select = styled.select`
   color: #111517;
 
   option {
+    font-weight: 400;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
+    border-radius: 5px;
   }
 `;
