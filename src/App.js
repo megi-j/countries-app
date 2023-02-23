@@ -21,6 +21,8 @@ const GlobalStyles = createGlobalStyle`
 function App() {
   const [data, setData] = useState();
   const [fetched, setFetched] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [filterClicked, setFilterClicked] = useState(false);
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       console.log(response.data);
@@ -28,6 +30,16 @@ function App() {
       setData(response.data);
     });
   }, []);
+
+  function handleChange(e) {
+    setFilterClicked(true);
+    let filteredWithRegion = data.filter((country) => {
+      return country.region === e.target.value;
+    });
+
+    setFilteredData(filteredWithRegion);
+    console.log(filteredWithRegion);
+  }
   return (
     <Container>
       <GlobalStyles />
@@ -44,8 +56,17 @@ function App() {
           <ModeText>Dark Mode</ModeText>
         </ModeBox>
       </Header>
-      <FilterSection data={data} fetched={fetched} />
-      <MainSection data={data} fetched={fetched} />
+      <FilterSection
+        data={data}
+        fetched={fetched}
+        handleChange={handleChange}
+      />
+      <MainSection
+        data={data}
+        fetched={fetched}
+        filteredData={filteredData}
+        filterClicked={filterClicked}
+      />
     </Container>
   );
 }

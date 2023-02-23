@@ -1,5 +1,6 @@
 import search from "../images/search.png";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function FilterSection(props) {
   let regions = [];
@@ -11,7 +12,7 @@ export default function FilterSection(props) {
   let uniqueRegion = regions.filter((reg, index) => {
     return regions.indexOf(reg) === index;
   });
-  console.log(uniqueRegion);
+
   return (
     <FilteredSection>
       <SearchBox>
@@ -19,7 +20,7 @@ export default function FilterSection(props) {
         <SearchInput placeholder="Search for a country…" />
       </SearchBox>
       <FilterBox>
-        <Select name="" id="">
+        <Select name="" id="" onChange={(e) => props.handleChange(e)}>
           <option value="" selected>
             Filter by Region
           </option>
