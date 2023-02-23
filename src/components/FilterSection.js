@@ -17,7 +17,10 @@ export default function FilterSection(props) {
     <FilteredSection>
       <SearchBox>
         <img src={search} alt="" />
-        <SearchInput placeholder="Search for a country…" />
+        <SearchInput
+          onInput={(e) => props.handleInput(e)}
+          placeholder="Search for a country…"
+        />
       </SearchBox>
       <FilterBox>
         <Select name="" id="" onChange={(e) => props.handleChange(e)}>

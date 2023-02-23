@@ -22,7 +22,8 @@ function App() {
   const [data, setData] = useState();
   const [fetched, setFetched] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-  const [filterClicked, setFilterClicked] = useState(false);
+
+  // const [filterClicked, setFilterClicked] = useState(false);
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       console.log(response.data);
@@ -32,13 +33,20 @@ function App() {
   }, []);
 
   function handleChange(e) {
-    setFilterClicked(true);
+    // setFilterClicked(true);
     let filteredWithRegion = data.filter((country) => {
       return country.region === e.target.value;
     });
 
     setFilteredData(filteredWithRegion);
     console.log(filteredWithRegion);
+  }
+  function handleInput(e) {
+    let filteredWithName = data.filter((country) => {
+      return country.name.common.toLowerCase() === e.target.value.toLowerCase();
+    });
+    console.log(filteredWithName);
+    setFilteredData(filteredWithName);
   }
   return (
     <Container>
@@ -60,12 +68,13 @@ function App() {
         data={data}
         fetched={fetched}
         handleChange={handleChange}
+        handleInput={handleInput}
       />
       <MainSection
         data={data}
         fetched={fetched}
         filteredData={filteredData}
-        filterClicked={filterClicked}
+        // filterClicked={filterClicked}
       />
     </Container>
   );
