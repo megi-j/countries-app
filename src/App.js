@@ -1,7 +1,9 @@
 import styled, { createGlobalStyle } from "styled-components";
 import moon from "./images/moon.png";
 import { Helmet } from "react-helmet";
-import FilterSection from "./FilterSection";
+import FilterSection from "./components/FilterSection";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -16,6 +18,15 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 function App() {
+  const [data, setData] = useState();
+  const [fetched, setFetched] = useState(false);
+  useEffect(() => {
+    axios.get("https://restcountries.com/v3.1/all").then((response) => {
+      console.log(response.data);
+      setFetched(true);
+      setData(response.data);
+    });
+  }, []);
   return (
     <Container>
       <GlobalStyles />
@@ -32,7 +43,7 @@ function App() {
           <ModeText>Dark Mode</ModeText>
         </ModeBox>
       </Header>
-      <FilterSection />
+      <FilterSection data={data} fetched={fetched} />
     </Container>
   );
 }

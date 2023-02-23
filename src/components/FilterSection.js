@@ -1,7 +1,17 @@
-import search from "./images/search.png";
+import search from "../images/search.png";
 import styled from "styled-components";
 
-export default function FilterSection() {
+export default function FilterSection(props) {
+  let regions = [];
+  if (props.fetched) {
+    props.data.filter((country) => {
+      return regions.push(country.region);
+    });
+  }
+  let uniqueRegion = regions.filter((reg, index) => {
+    return regions.indexOf(reg) === index;
+  });
+  console.log(uniqueRegion);
   return (
     <FilteredSection>
       <SearchBox>
@@ -13,8 +23,13 @@ export default function FilterSection() {
           <option value="" selected>
             Filter by Region
           </option>
-          <option value="">sdsd</option>
-          <option value="">sfdss</option>
+          {uniqueRegion.map((region) => {
+            return (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            );
+          })}
         </Select>
       </FilterBox>
     </FilteredSection>
