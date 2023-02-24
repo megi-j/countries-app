@@ -3,12 +3,20 @@ import styled from "styled-components";
 
 export default function CountryCard(props) {
   return (
-    <Card>
+    <Card isClickedMode={props.isClickedMode}>
       <Flag src={props.src} alt={props.alt} />
-      <CountryName>{props.countryName}</CountryName>
-      <Population>Population: {props.population}</Population>
-      <Region>Region: {props.region}</Region>
-      <Capital>Capital: {props.capital}</Capital>
+      <CountryName isClickedMode={props.isClickedMode}>
+        {props.countryName}
+      </CountryName>
+      <Population isClickedMode={props.isClickedMode}>
+        Population: {props.population}
+      </Population>
+      <Region isClickedMode={props.isClickedMode}>
+        Region: {props.region}
+      </Region>
+      <Capital isClickedMode={props.isClickedMode}>
+        Capital: {props.capital}
+      </Capital>
     </Card>
   );
 }
@@ -16,7 +24,7 @@ export default function CountryCard(props) {
 const Card = styled.div`
   width: 264px;
   height: 336px;
-  background: #ffffff;
+  background: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
   border-radius: 5px;
   display: flex;
@@ -28,25 +36,28 @@ const Card = styled.div`
 const Flag = styled.img`
   width: 100%;
   height: 160px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 const CountryName = styled.h3`
   font-weight: 800;
   font-size: 18px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   text-align: center;
+  font-family: "Nunito Sans";
 `;
 const Population = styled.p`
   font-weight: 600;
   font-size: 14px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const Region = styled.p`
   font-weight: 600;
   font-size: 14px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const Capital = styled.p`
   font-weight: 600;
   font-size: 14px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;

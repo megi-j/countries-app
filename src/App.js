@@ -22,7 +22,7 @@ function App() {
   const [data, setData] = useState();
   const [fetched, setFetched] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
-
+  const [isClickedMode, setIsClickedMode] = useState(false);
   // const [filterClicked, setFilterClicked] = useState(false);
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
@@ -49,7 +49,7 @@ function App() {
     setFilteredData(filteredWithName);
   }
   return (
-    <Container>
+    <Container isClickedMode={isClickedMode}>
       <GlobalStyles />
       <Helmet>
         <link
@@ -57,11 +57,11 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      <Header>
-        <Title>Where in the world?</Title>
-        <ModeBox>
+      <Header isClickedMode={isClickedMode}>
+        <Title isClickedMode={isClickedMode}>Where in the world?</Title>
+        <ModeBox onClick={() => setIsClickedMode(!isClickedMode)}>
           <img src={moon} alt="" />
-          <ModeText>Dark Mode</ModeText>
+          <ModeText isClickedMode={isClickedMode}>Dark Mode</ModeText>
         </ModeBox>
       </Header>
       <FilterSection
@@ -69,12 +69,14 @@ function App() {
         fetched={fetched}
         handleChange={handleChange}
         handleInput={handleInput}
+        isClickedMode={isClickedMode}
       />
       <MainSection
         data={data}
         fetched={fetched}
         filteredData={filteredData}
         // filterClicked={filterClicked}
+        isClickedMode={isClickedMode}
       />
     </Container>
   );
@@ -86,7 +88,7 @@ const Container = styled.div`
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  background: #fafafa;
+  background: ${(props) => (props.isClickedMode ? "#202C36" : "#fafafa")};
 `;
 const Header = styled.header`
   width: 100%;
@@ -94,13 +96,13 @@ const Header = styled.header`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
+  background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#FFFFFF")};
 `;
 const Title = styled.h2`
   font-weight: 800;
   font-size: 24px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const ModeBox = styled.div`
   width: 108px;
@@ -108,9 +110,10 @@ const ModeBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 `;
 const ModeText = styled.p`
   font-weight: 600;
   font-size: 16px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;

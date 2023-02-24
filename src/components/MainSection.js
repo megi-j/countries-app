@@ -16,6 +16,7 @@ export default function MainSection(props) {
                   region={country.region}
                   capital={country.capital}
                   key={country.name.common}
+                  isClickedMode={props.isClickedMode}
                 />
               );
             })
@@ -29,6 +30,7 @@ export default function MainSection(props) {
                   region={country.region}
                   capital={country.capital}
                   key={country.name.common}
+                  isClickedMode={props.isClickedMode}
                 />
               );
             })}
