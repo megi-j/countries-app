@@ -39,11 +39,11 @@ export default function MainSection(props) {
   );
 }
 const Main = styled.section`
-  width: 100%;
-  margin-top: 48px;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   gap: 40px;
+  margin: 48px auto;
 `;

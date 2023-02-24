@@ -16,7 +16,21 @@ export default function FilterSection(props) {
   return (
     <FilteredSection>
       <SearchBox isClickedMode={props.isClickedMode}>
-        <img src={search} alt="" />
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M12.5 11H11.7L11.4 10.7C12.4 9.6 13 8.1 13 6.5C13 2.9 10.1 0 6.5 0C2.9 0 0 2.9 0 6.5C0 10.1 2.9 13 6.5 13C8.1 13 9.6 12.4 10.7 11.4L11 11.7V12.5L16 17.5L17.5 16L12.5 11ZM6.5 11C4 11 2 9 2 6.5C2 4 4 2 6.5 2C9 2 11 4 11 6.5C11 9 9 11 6.5 11Z"
+            fill={props.isClickedMode ? "#fff" : "#848484"}
+          />
+        </svg>
+
         <SearchInput
           onInput={(e) => props.handleInput(e)}
           placeholder="Search for a country…"
@@ -47,7 +61,7 @@ export default function FilterSection(props) {
 }
 const FilteredSection = styled.section`
   width: 90%;
-  margin-top: 48px;
+  margin: 48px auto;
   display: flex;
   justify-content: space-between;
 `;
@@ -66,9 +80,11 @@ const SearchInput = styled.input`
   width: 80%;
   height: 100%;
   border: none;
+  border-radius: 5px;
   outline: none;
   font-weight: 400;
   font-size: 14px;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#848484")};
   background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   ::placeholder {
     color: ${(props) => (props.isClickedMode ? "#fff" : "#848484")};
@@ -88,8 +104,10 @@ const Select = styled.select`
   height: 100%;
   border: none;
   outline: none;
+  border-radius: 5px;
   font-weight: 400;
   font-size: 14px;
+  padding: 18px 24px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   background: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   option {
@@ -100,5 +118,8 @@ const Select = styled.select`
     background: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
     border-radius: 5px;
+    &:hover {
+      background-color: red;
+    }
   }
 `;

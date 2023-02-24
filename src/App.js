@@ -58,11 +58,13 @@ function App() {
         />
       </Helmet>
       <Header isClickedMode={isClickedMode}>
-        <Title isClickedMode={isClickedMode}>Where in the world?</Title>
-        <ModeBox onClick={() => setIsClickedMode(!isClickedMode)}>
-          <img src={moon} alt="" />
-          <ModeText isClickedMode={isClickedMode}>Dark Mode</ModeText>
-        </ModeBox>
+        <HeaderInsideBox>
+          <Title isClickedMode={isClickedMode}>Where in the world?</Title>
+          <ModeBox onClick={() => setIsClickedMode(!isClickedMode)}>
+            <img src={moon} alt="" />
+            <ModeText isClickedMode={isClickedMode}>Dark Mode</ModeText>
+          </ModeBox>
+        </HeaderInsideBox>
       </Header>
       <FilterSection
         data={data}
@@ -93,11 +95,16 @@ const Container = styled.div`
 const Header = styled.header`
   width: 100%;
   height: 80px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
   background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#FFFFFF")};
+`;
+const HeaderInsideBox = styled.div`
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 const Title = styled.h2`
   font-weight: 800;
