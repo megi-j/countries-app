@@ -39,6 +39,7 @@ const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 46px;
+  cursor: pointer;
 `;
 const Flag = styled.img`
   width: 100%;
