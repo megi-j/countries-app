@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function CountryCard(props) {
+  let navigate = useNavigate();
   return (
-    <Card isClickedMode={props.isClickedMode}>
+    <Card
+      isClickedMode={props.isClickedMode}
+      onClick={() => {
+        navigate(`/${props.countryName}`);
+      }}
+    >
       <Flag src={props.src} alt={props.alt} />
       <CountryName isClickedMode={props.isClickedMode}>
         {props.countryName}

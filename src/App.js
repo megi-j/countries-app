@@ -1,11 +1,12 @@
 import styled, { createGlobalStyle } from "styled-components";
-import moon from "./images/moon.png";
 import { Helmet } from "react-helmet";
-import FilterSection from "./components/FilterSection";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import MainSection from "./components/MainSection";
+import CountryDetail from "./components/CountryDetail";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
 
+import HeaderPage from "./components/HeaderPage";
 const GlobalStyles = createGlobalStyle`
   *{
       margin: 0;
@@ -57,29 +58,33 @@ function App() {
           rel="stylesheet"
         />
       </Helmet>
-      <Header isClickedMode={isClickedMode}>
-        <HeaderInsideBox>
-          <Title isClickedMode={isClickedMode}>Where in the world?</Title>
-          <ModeBox onClick={() => setIsClickedMode(!isClickedMode)}>
-            <img src={moon} alt="" />
-            <ModeText isClickedMode={isClickedMode}>Dark Mode</ModeText>
-          </ModeBox>
-        </HeaderInsideBox>
-      </Header>
-      <FilterSection
-        data={data}
-        fetched={fetched}
-        handleChange={handleChange}
-        handleInput={handleInput}
-        isClickedMode={isClickedMode}
-      />
-      <MainSection
-        data={data}
-        fetched={fetched}
-        filteredData={filteredData}
-        // filterClicked={filterClicked}
-        isClickedMode={isClickedMode}
-      />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HeaderPage
+              isClickedMode={isClickedMode}
+              clickedMode={() => setIsClickedMode(!isClickedMode)}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Home
+                data={data}
+                fetched={fetched}
+                handleChange={handleChange}
+                handleInput={handleInput}
+                isClickedMode={isClickedMode}
+                filteredData={filteredData}
+              />
+            }
+          />
+          <Route path="/:countryName" element={<CountryDetail data={data} />} />
+        </Route>
+      </Routes>
     </Container>
   );
 }
@@ -91,36 +96,4 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   background: ${(props) => (props.isClickedMode ? "#202C36" : "#fafafa")};
-`;
-const Header = styled.header`
-  width: 100%;
-  height: 80px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
-  background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#FFFFFF")};
-`;
-const HeaderInsideBox = styled.div`
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const Title = styled.h2`
-  font-weight: 800;
-  font-size: 24px;
-  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-`;
-const ModeBox = styled.div`
-  width: 108px;
-  height: 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`;
-const ModeText = styled.p`
-  font-weight: 600;
-  font-size: 16px;
-  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
