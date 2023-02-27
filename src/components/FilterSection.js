@@ -12,7 +12,7 @@ export default function FilterSection(props) {
   let uniqueRegion = regions.filter((reg, index) => {
     return regions.indexOf(reg) === index;
   });
-
+  console.log(uniqueRegion);
   return (
     <FilteredSection>
       <SearchBox isClickedMode={props.isClickedMode}>

@@ -24,7 +24,7 @@ function App() {
   const [fetched, setFetched] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isClickedMode, setIsClickedMode] = useState(false);
-  // const [filterClicked, setFilterClicked] = useState(false);
+
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       console.log(response.data);
@@ -34,7 +34,6 @@ function App() {
   }, []);
 
   function handleChange(e) {
-    // setFilterClicked(true);
     let filteredWithRegion = data.filter((country) => {
       return country.region === e.target.value;
     });
@@ -82,7 +81,12 @@ function App() {
               />
             }
           />
-          <Route path="/:countryName" element={<CountryDetail data={data} />} />
+          <Route
+            path="/:countryName"
+            element={
+              <CountryDetail data={data} isClickedMode={isClickedMode} />
+            }
+          />
         </Route>
       </Routes>
     </Container>

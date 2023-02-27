@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import arrow from "../images/arrow-back.png";
 
 export default function CountryDetail(props) {
   let { countryName } = useParams();
@@ -9,25 +8,57 @@ export default function CountryDetail(props) {
     return country.name.common == countryName;
   }); //აქ ვპოულობ რომელი ქარდის detail ღილაკზეც მოხდა კლიკი
 
-  let nameArray = Object.entries(countryDetailInfo.name.nativeName);
-  let currency = Object.entries(countryDetailInfo.currencies);
-  let languages = Object.entries(countryDetailInfo.languages);
+  let nameArray =
+    countryDetailInfo.name.nativeName &&
+    Object.entries(countryDetailInfo.name.nativeName);
+  let languages =
+    countryDetailInfo.languages && Object.entries(countryDetailInfo.languages);
+  let currency =
+    countryDetailInfo.currencies &&
+    Object.entries(countryDetailInfo.currencies);
+  let borders = [];
 
-  // let borders = props.data.filter((item) => {
-  //   countryDetailInfo.borders.map((el) => {
-  //     if (el == item.fifa) {
-  //       return console.log(item.name.common);
+  // console.log(nameArray);
+  // if (countryDetailInfo.borders) {
+  //   for (let i = 0; i < props.data.length; i++) {
+  //     for (let j = 0; j < countryDetailInfo.borders.length; j++) {
+  //       if (props.data[i].fifa == countryDetailInfo.borders[j]) {
+  //         console.log(props.data[i].name.common);
+  //         borders.push(props.data[i].name.common);
+  //       }
   //     }
-  //   });
-  // return console.log(item.name.common);
-  // });
-
+  //   }
+  // }
+  countryDetailInfo.borders &&
+    props.data.forEach((item) => {
+      countryDetailInfo.borders.forEach((bord) => {
+        if (item.fifa == bord) {
+          borders.push(item.name.common);
+        }
+      });
+    });
   // console.log(borders);
-  console.log(countryDetailInfo.fifa);
+  console.log(countryDetailInfo);
   return (
     <DetailSection>
-      <BackButton onClick={() => navigate("/")}>
-        <img src={arrow} alt="" />
+      <BackButton
+        isClickedMode={props.isClickedMode}
+        onClick={() => navigate("/")}
+      >
+        <svg
+          width="19"
+          height="12"
+          viewBox="0 0 19 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M6.46447 0.107445L7.64298 1.28596L3.75389 5.17504L18.6031 5.17504L18.6031 6.82496L3.75389 6.82496L7.64298 10.714L6.46447 11.8926L0.57191 6L6.46447 0.107445Z"
+            fill={props.isClickedMode ? "#fff" : "#111517"}
+          />
+        </svg>
         Back
       </BackButton>
       <DetailInfo>
@@ -36,10 +67,14 @@ export default function CountryDetail(props) {
           alt={countryDetailInfo.flags.alt}
         />
         <MoreInfoBox>
-          <CountryName>{countryDetailInfo.name.common}</CountryName>
+          <CountryName isClickedMode={props.isClickedMode}>
+            {countryDetailInfo.name.common}
+          </CountryName>
           <Wrapper>
-            <MoreInfo>
-              <MoreInfoText>Native Name: {nameArray[0][1].common}</MoreInfoText>
+            <MoreInfo isClickedMode={props.isClickedMode}>
+              <MoreInfoText>
+                Native Name: {nameArray && nameArray[0][1].common}
+              </MoreInfoText>
               <MoreInfoText>
                 Population: {countryDetailInfo.population}
               </MoreInfoText>
@@ -49,20 +84,26 @@ export default function CountryDetail(props) {
               </MoreInfoText>
               <MoreInfoText>Capital: {countryDetailInfo.capital}</MoreInfoText>
             </MoreInfo>
-            <MoreInfo>
+            <MoreInfo isClickedMode={props.isClickedMode}>
               <MoreInfoText>
                 Top Level Domain: {countryDetailInfo.tld}
               </MoreInfoText>
-              <MoreInfoText>Currencies: {currency[0][1].name}</MoreInfoText>
-              <MoreInfoText>Langiages: {languages[0][1]}</MoreInfoText>
+              <MoreInfoText>
+                Currencies: {currency && currency[0][1].name}
+              </MoreInfoText>
+              <MoreInfoText>
+                Langiages: {languages && languages[0][1]}
+              </MoreInfoText>
             </MoreInfo>
           </Wrapper>
           {countryDetailInfo.borders && (
-            <Wrapper>
+            <Wrapper isClickedMode={props.isClickedMode}>
               Border Countries:
-              {/* {borders.map((item) => {
-                return <Button>{item}</Button>;
-              })} */}
+              {borders.map((item) => {
+                return (
+                  <Button isClickedMode={props.isClickedMode}>{item}</Button>
+                );
+              })}
             </Wrapper>
           )}
         </MoreInfoBox>
@@ -73,14 +114,13 @@ export default function CountryDetail(props) {
 
 const DetailSection = styled.section`
   width: 90%;
-
   margin: 90px auto;
 `;
 const BackButton = styled.button`
   width: 136px;
   height: 40px;
   border: none;
-  background-color: #fff;
+  background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.293139);
   border-radius: 6px;
   display: flex;
@@ -88,7 +128,7 @@ const BackButton = styled.button`
   justify-content: space-around;
   font-weight: 300;
   font-size: 16px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   cursor: pointer;
 `;
 const DetailInfo = styled.div`
@@ -107,7 +147,6 @@ const Flag = styled.img`
 const MoreInfoBox = styled.div`
   width: 50%;
   height: 400px;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -115,34 +154,34 @@ const MoreInfoBox = styled.div`
 const CountryName = styled.h2`
   font-weight: 800;
   font-size: 32px;
-  color: #111517;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const MoreInfo = styled.div`
   width: 100%;
   height: 160px;
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   gap: 10px;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const MoreInfoText = styled.p`
   font-weight: 600;
   font-size: 16px;
-  color: #111517;
 `;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: 600;
   font-size: 16px;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const Button = styled.button`
   width: 96px;
   height: 28px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.104931);
   border-radius: 2px;
   border: none;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
