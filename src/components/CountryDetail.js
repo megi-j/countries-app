@@ -18,17 +18,6 @@ export default function CountryDetail(props) {
     Object.entries(countryDetailInfo.currencies);
   let borders = [];
 
-  // console.log(nameArray);
-  // if (countryDetailInfo.borders) {
-  //   for (let i = 0; i < props.data.length; i++) {
-  //     for (let j = 0; j < countryDetailInfo.borders.length; j++) {
-  //       if (props.data[i].fifa == countryDetailInfo.borders[j]) {
-  //         console.log(props.data[i].name.common);
-  //         borders.push(props.data[i].name.common);
-  //       }
-  //     }
-  //   }
-  // }
   countryDetailInfo.borders &&
     props.data.forEach((item) => {
       countryDetailInfo.borders.forEach((bord) => {
@@ -37,8 +26,7 @@ export default function CountryDetail(props) {
         }
       });
     });
-  // console.log(borders);
-  console.log(countryDetailInfo);
+
   return (
     <DetailSection>
       <BackButton
@@ -73,35 +61,48 @@ export default function CountryDetail(props) {
           <Wrapper>
             <MoreInfo isClickedMode={props.isClickedMode}>
               <MoreInfoText>
-                Native Name: {nameArray && nameArray[0][1].common}
+                <b>Native Name:</b>&nbsp;&nbsp;{" "}
+                {nameArray && nameArray[0][1].common}
               </MoreInfoText>
               <MoreInfoText>
-                Population: {countryDetailInfo.population}
+                <b>Population:</b>&nbsp;&nbsp; {countryDetailInfo.population}
               </MoreInfoText>
-              <MoreInfoText>Region: {countryDetailInfo.region}</MoreInfoText>
               <MoreInfoText>
-                Sub Region: {countryDetailInfo.subregion}
+                <b>Region:</b>&nbsp;&nbsp; {countryDetailInfo.region}
               </MoreInfoText>
-              <MoreInfoText>Capital: {countryDetailInfo.capital}</MoreInfoText>
+              <MoreInfoText>
+                <b>Sub Region:</b>&nbsp;&nbsp; {countryDetailInfo.subregion}
+              </MoreInfoText>
+              <MoreInfoText>
+                <b>Capital:</b>&nbsp;&nbsp; {countryDetailInfo.capital}
+              </MoreInfoText>
             </MoreInfo>
             <MoreInfo isClickedMode={props.isClickedMode}>
               <MoreInfoText>
-                Top Level Domain: {countryDetailInfo.tld}
+                <b>Top Level Domain:</b> &nbsp;&nbsp;{countryDetailInfo.tld}
               </MoreInfoText>
               <MoreInfoText>
-                Currencies: {currency && currency[0][1].name}
+                <b>Currencies:</b>&nbsp;&nbsp; {currency && currency[0][1].name}
               </MoreInfoText>
               <MoreInfoText>
-                Langiages: {languages && languages[0][1]}
+                <b>Langiages:</b>&nbsp;&nbsp; {languages && languages[0][1]}
               </MoreInfoText>
             </MoreInfo>
           </Wrapper>
           {countryDetailInfo.borders && (
-            <Wrapper isClickedMode={props.isClickedMode}>
+            <Wrapper
+              isClickedMode={props.isClickedMode}
+              style={{ justifyContent: "flex-start" }}
+            >
               Border Countries:
               {borders.map((item) => {
                 return (
-                  <Button isClickedMode={props.isClickedMode}>{item}</Button>
+                  <Button
+                    onClick={() => navigate(`/${item}`)}
+                    isClickedMode={props.isClickedMode}
+                  >
+                    {item}
+                  </Button>
                 );
               })}
             </Wrapper>
@@ -114,6 +115,7 @@ export default function CountryDetail(props) {
 
 const DetailSection = styled.section`
   width: 90%;
+  height: 80vh;
   margin: 90px auto;
 `;
 const BackButton = styled.button`
@@ -143,6 +145,7 @@ const Flag = styled.img`
   border-radius: 10.0057px;
   max-width: 560px;
   width: 100%;
+  height: 100%;
 `;
 const MoreInfoBox = styled.div`
   width: 50%;
@@ -157,11 +160,11 @@ const CountryName = styled.h2`
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
 const MoreInfo = styled.div`
-  width: 100%;
+  width: 40%;
   height: 160px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
 `;
@@ -172,6 +175,9 @@ const MoreInfoText = styled.p`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   font-weight: 600;
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
@@ -184,4 +190,5 @@ const Button = styled.button`
   border-radius: 2px;
   border: none;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  cursor: pointer;
 `;

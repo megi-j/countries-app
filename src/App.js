@@ -39,7 +39,6 @@ function App() {
     });
 
     setFilteredData(filteredWithRegion);
-    console.log(filteredWithRegion);
   }
   function handleInput(e) {
     let filteredWithName = data.filter((country) => {
