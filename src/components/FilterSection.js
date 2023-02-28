@@ -64,7 +64,7 @@ const FilteredSection = styled.section`
   margin: 48px auto;
   display: flex;
   justify-content: space-between;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     flex-direction: column;
     margin: 24px auto;
   }
@@ -79,7 +79,7 @@ const SearchBox = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     margin-bottom: 40px;
     height: 48px;
   }
@@ -106,7 +106,7 @@ const FilterBox = styled.div`
   background: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
   border-radius: 5px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     height: 48px;
     padding-right: 10px;
   }
@@ -133,11 +133,11 @@ const Select = styled.select`
     &:hover {
       background-color: red;
     }
-    @media (max-width: 375px) {
+    @media (max-width: 400px) {
       font-size: 12px;
     }
   }
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 12px;
     padding: 14px 24px;
   }

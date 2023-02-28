@@ -98,7 +98,7 @@ const DetailSection = styled.section`
   width: 90%;
   height: 80vh;
   margin: 90px auto;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     height: auto;
   }
 `;
@@ -109,7 +109,7 @@ const DetailInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     flex-direction: column;
   }
 `;
@@ -119,7 +119,7 @@ const Flag = styled.img`
   max-width: 560px;
   width: 100%;
   height: 100%;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     margin-bottom: 40px;
   }
 `;
@@ -128,7 +128,7 @@ const MoreInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 100%;
   }
 `;
@@ -137,7 +137,7 @@ const CountryName = styled.h2`
   font-size: 32px;
   margin-bottom: 20px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 22px;
   }
 `;
@@ -148,7 +148,7 @@ const MoreInfo = styled.div`
   justify-content: flex-start;
   gap: 10px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 100%;
     margin-bottom: 30px;
   }
@@ -156,7 +156,7 @@ const MoreInfo = styled.div`
 const MoreInfoText = styled.p`
   font-weight: 600;
   font-size: 16px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 14px;
   }
 `;
@@ -170,7 +170,7 @@ const Wrapper = styled.div`
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   margin-bottom: 20px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     flex-direction: column;
   }
 `;
@@ -184,7 +184,7 @@ const BorderWrapper = styled.div`
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   margin-bottom: 20px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     flex-direction: column;
     align-items: start;
   }
@@ -199,7 +199,7 @@ const Button = styled.button`
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   cursor: pointer;
   font-size: 14px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 12px;
     letter-spacing: 0.5px;
   }

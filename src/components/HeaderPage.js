@@ -35,7 +35,7 @@ const Title = styled.h2`
   font-weight: 800;
   font-size: 24px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 18px;
   }
 `;
@@ -46,7 +46,7 @@ const ModeBox = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 84px;
     height: 17px;
   }
@@ -55,14 +55,14 @@ const ModeText = styled.p`
   font-weight: 600;
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     font-size: 12px;
   }
 `;
 const MoonIcon = styled.img`
   width: 15px;
   height: 13px;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 12px;
     height: 11px;
   }

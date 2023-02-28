@@ -38,7 +38,7 @@ const BackBtn = styled.button`
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   cursor: pointer;
-  @media (max-width: 375px) {
+  @media (max-width: 400px) {
     width: 104px;
     height: 36px;
     font-size: 14px;
