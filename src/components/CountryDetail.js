@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import BackButton from "./BackButton";
 
 export default function CountryDetail(props) {
   let { countryName } = useParams();
@@ -29,26 +30,7 @@ export default function CountryDetail(props) {
 
   return (
     <DetailSection>
-      <BackButton
-        isClickedMode={props.isClickedMode}
-        onClick={() => navigate("/")}
-      >
-        <svg
-          width="19"
-          height="12"
-          viewBox="0 0 19 12"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M6.46447 0.107445L7.64298 1.28596L3.75389 5.17504L18.6031 5.17504L18.6031 6.82496L3.75389 6.82496L7.64298 10.714L6.46447 11.8926L0.57191 6L6.46447 0.107445Z"
-            fill={props.isClickedMode ? "#fff" : "#111517"}
-          />
-        </svg>
-        Back
-      </BackButton>
+      <BackButton isClickedMode={props.isClickedMode} />
       <DetailInfo>
         <Flag
           src={countryDetailInfo.flags.png}
@@ -90,22 +72,21 @@ export default function CountryDetail(props) {
             </MoreInfo>
           </Wrapper>
           {countryDetailInfo.borders && (
-            <Wrapper
-              isClickedMode={props.isClickedMode}
-              style={{ justifyContent: "flex-start" }}
-            >
-              Border Countries:
-              {borders.map((item) => {
-                return (
-                  <Button
-                    onClick={() => navigate(`/${item}`)}
-                    isClickedMode={props.isClickedMode}
-                  >
-                    {item}
-                  </Button>
-                );
-              })}
-            </Wrapper>
+            <BorderWrapper isClickedMode={props.isClickedMode}>
+              <p>Border Countries:</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                {borders.map((item) => {
+                  return (
+                    <Button
+                      onClick={() => navigate(`/${item}`)}
+                      isClickedMode={props.isClickedMode}
+                    >
+                      {item}
+                    </Button>
+                  );
+                })}
+              </div>
+            </BorderWrapper>
           )}
         </MoreInfoBox>
       </DetailInfo>
@@ -117,28 +98,20 @@ const DetailSection = styled.section`
   width: 90%;
   height: 80vh;
   margin: 90px auto;
+  @media (max-width: 375px) {
+    height: auto;
+  }
 `;
-const BackButton = styled.button`
-  width: 136px;
-  height: 40px;
-  border: none;
-  background-color: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.293139);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-weight: 300;
-  font-size: 16px;
-  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
-  cursor: pointer;
-`;
+
 const DetailInfo = styled.div`
   width: 100%;
   margin-top: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 `;
 const Flag = styled.img`
   box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.0294384);
@@ -146,31 +119,46 @@ const Flag = styled.img`
   max-width: 560px;
   width: 100%;
   height: 100%;
+  @media (max-width: 375px) {
+    margin-bottom: 40px;
+  }
 `;
 const MoreInfoBox = styled.div`
   width: 50%;
-  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  @media (max-width: 375px) {
+    width: 100%;
+  }
 `;
 const CountryName = styled.h2`
   font-weight: 800;
   font-size: 32px;
+  margin-bottom: 20px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  @media (max-width: 375px) {
+    font-size: 22px;
+  }
 `;
 const MoreInfo = styled.div`
   width: 40%;
-  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  @media (max-width: 375px) {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 `;
 const MoreInfoText = styled.p`
   font-weight: 600;
   font-size: 16px;
+  @media (max-width: 375px) {
+    font-size: 14px;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -181,6 +169,25 @@ const Wrapper = styled.div`
   font-weight: 600;
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  margin-bottom: 20px;
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
+`;
+const BorderWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  margin-bottom: 20px;
+  @media (max-width: 375px) {
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 const Button = styled.button`
   width: 96px;
@@ -191,4 +198,9 @@ const Button = styled.button`
   border: none;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
   cursor: pointer;
+  font-size: 14px;
+  @media (max-width: 375px) {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
 `;

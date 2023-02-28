@@ -8,9 +8,7 @@ export default function HeaderPage(props) {
         <HeaderInsideBox>
           <Title isClickedMode={props.isClickedMode}>Where in the world?</Title>
           <ModeBox onClick={props.clickedMode}>
-            {/* {() => props.setIsClickedMode(!props.isClickedMode)} */}
-
-            <img src={moon} alt="" />
+            <MoonIcon src={moon} alt="moon" />
             <ModeText isClickedMode={props.isClickedMode}>Dark Mode</ModeText>
           </ModeBox>
         </HeaderInsideBox>
@@ -37,6 +35,9 @@ const Title = styled.h2`
   font-weight: 800;
   font-size: 24px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  @media (max-width: 375px) {
+    font-size: 18px;
+  }
 `;
 const ModeBox = styled.div`
   width: 108px;
@@ -45,9 +46,24 @@ const ModeBox = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 375px) {
+    width: 84px;
+    height: 17px;
+  }
 `;
 const ModeText = styled.p`
   font-weight: 600;
   font-size: 16px;
   color: ${(props) => (props.isClickedMode ? "#fff" : "#111517")};
+  @media (max-width: 375px) {
+    font-size: 12px;
+  }
+`;
+const MoonIcon = styled.img`
+  width: 15px;
+  height: 13px;
+  @media (max-width: 375px) {
+    width: 12px;
+    height: 11px;
+  }
 `;

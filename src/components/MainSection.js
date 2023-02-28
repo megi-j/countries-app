@@ -46,4 +46,7 @@ const Main = styled.section`
   align-items: center;
   gap: 40px;
   margin: 48px auto;
+  @media (max-width: 375px) {
+    justify-content: center;
+  }
 `;
