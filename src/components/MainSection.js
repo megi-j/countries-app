@@ -42,7 +42,7 @@ const Main = styled.section`
   width: 90%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 40px;
   margin: 48px auto;

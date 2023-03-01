@@ -24,7 +24,7 @@ function App() {
   const [fetched, setFetched] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [isClickedMode, setIsClickedMode] = useState(false);
-
+  const [inputValue, setInputValue] = useState("");
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       console.log(response.data);
@@ -42,10 +42,15 @@ function App() {
   }
   function handleInput(e) {
     let filteredWithName = data.filter((country) => {
-      return country.name.common.toLowerCase() === e.target.value.toLowerCase();
+      return country.name.common
+        .toLowerCase()
+        .includes(inputValue.toLowerCase());
     });
-    console.log(filteredWithName);
+    console.log(inputValue);
     setFilteredData(filteredWithName);
+  }
+  function change(e) {
+    setInputValue(e.target.value);
   }
   return (
     <Container isClickedMode={isClickedMode}>
@@ -77,6 +82,7 @@ function App() {
                 handleInput={handleInput}
                 isClickedMode={isClickedMode}
                 filteredData={filteredData}
+                change={change}
               />
             }
           />
@@ -97,6 +103,7 @@ export default App;
 const Container = styled.div`
   max-width: 1440px;
   width: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   background: ${(props) => (props.isClickedMode ? "#202C36" : "#fafafa")};
 `;

@@ -35,6 +35,7 @@ export default function FilterSection(props) {
           onInput={(e) => props.handleInput(e)}
           placeholder="Search for a country…"
           isClickedMode={props.isClickedMode}
+          onChange={(e) => props.change(e)}
         />
       </SearchBox>
       <FilterBox isClickedMode={props.isClickedMode}>
@@ -130,15 +131,13 @@ const Select = styled.select`
     background: ${(props) => (props.isClickedMode ? "#2B3844" : "#fff")};
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
     border-radius: 5px;
-    &:hover {
-      background-color: red;
-    }
-    @media (max-width: 400px) {
-      font-size: 12px;
-    }
   }
+
   @media (max-width: 400px) {
     font-size: 12px;
     padding: 14px 24px;
+    option {
+      font-size: 12px;
+    }
   }
 `;

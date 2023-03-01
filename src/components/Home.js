@@ -10,12 +10,12 @@ export default function Home(props) {
         handleChange={props.handleChange}
         handleInput={props.handleInput}
         isClickedMode={props.isClickedMode}
+        change={props.change}
       />
       <MainSection
         data={props.data}
         fetched={props.fetched}
         filteredData={props.filteredData}
-        // filterClicked={filterClicked}
         isClickedMode={props.isClickedMode}
       />
     </>
